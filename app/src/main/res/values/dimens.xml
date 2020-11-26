@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="flickr_toolbar_elevation">4dp</dimen>
+    <dimen name="flickr_search_field_margin">25dp</dimen>
+    <dimen name="flickr_image_row_item_margin">15dp</dimen>
+</resources>
