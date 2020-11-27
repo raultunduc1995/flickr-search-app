@@ -1,5 +1,6 @@
 package com.example.flickrsearchapp.utils
 
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -30,4 +31,12 @@ fun AppCompatActivity.replaceFragment(
         if (shouldAddToBackStack && fragmentTag != null)
             addToBackStack(fragmentTag)
     }
+}
+
+fun View.show() {
+    visibility = View.VISIBLE
+}
+
+fun View.remove() {
+    visibility = View.GONE
 }

@@ -2,4 +2,8 @@
     <string name="app_name">Flickr Search App</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search">Search</string>
+    <string name="no_photos_found">No photos found</string>
+    <string name="photo_title">Title: %1$s</string>
+    <string name="photo_description">Description: %1$s</string>
+    <string name="photo_date_uploaded">Date Uploaded: %1$s</string>
 </resources>

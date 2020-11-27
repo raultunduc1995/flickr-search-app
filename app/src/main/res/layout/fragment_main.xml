@@ -7,11 +7,14 @@
     tools:context=".fragments.MainFragment">
 
     <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/search_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/flickr_search_field_margin"
         android:layout_marginTop="@dimen/flickr_search_field_margin"
         android:maxLines="@integer/flickr_search_max_text_lines"
+        android:imeOptions="actionDone"
+        android:inputType="text"
         android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@id/search_button"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,4 +39,25 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/no_photos_found_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_photos_found"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_button" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
