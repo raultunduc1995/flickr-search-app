@@ -10,6 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -19,16 +21,16 @@ import com.example.flickrsearchapp.FlickrViewModel
 import com.example.flickrsearchapp.R
 import com.example.flickrsearchapp.databinding.FragmentMainBinding
 import com.example.flickrsearchapp.domain.PhotoDetails
-import com.example.flickrsearchapp.utils.*
+import com.example.flickrsearchapp.utils.remove
+import com.example.flickrsearchapp.utils.replaceFragment
+import com.example.flickrsearchapp.utils.show
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
 class MainFragment : Fragment() {
     @Inject
-    lateinit var viewModel: FlickrViewModel
-
-    @Inject
-    lateinit var compositeDisposable: LifecycleAwareCompositeDisposable
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel: FlickrViewModel by activityViewModels { viewModelFactory }
 
     private lateinit var imm: InputMethodManager
     private lateinit var imageAdapter: ImageAdapter
@@ -50,8 +52,6 @@ class MainFragment : Fragment() {
         binding = FragmentMainBinding.inflate(inflater, container, false)
 
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        compositeDisposable.attachLifecycle(lifecycle)
-        lifecycle.addObserver(compositeDisposable)
         return binding?.root
     }
 
@@ -87,7 +87,6 @@ class MainFragment : Fragment() {
                     it.remove()
             }
             imageAdapter.submitList(photos)
-            imageAdapter.notifyDataSetChanged()
         })
     }
 
@@ -108,11 +107,7 @@ class MainFragment : Fragment() {
             return
 
         showProgress()
-        compositeDisposable.subscribe(
-            viewModel.searchPhotosByName(searchText)
-                .defaultSchedulers()
-                .subscribe({}, {})
-        )
+        viewModel.searchPhotosByName(searchText)
     }
 
     private fun showProgress() {
@@ -134,7 +129,6 @@ class MainFragment : Fragment() {
         super.onDestroyView()
 
         binding = null
-        lifecycle.removeObserver(compositeDisposable)
     }
 }
 

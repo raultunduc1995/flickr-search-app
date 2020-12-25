@@ -1,10 +1,14 @@
 package com.example.flickrsearchapp.dagger
 
+import androidx.lifecycle.ViewModel
 import com.example.flickrsearchapp.BuildConfig
+import com.example.flickrsearchapp.FlickrViewModel
 import com.example.flickrsearchapp.network.Api
 import com.example.flickrsearchapp.utils.LifecycleAwareCompositeDisposable
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.multibindings.IntoMap
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -54,4 +58,12 @@ class NetworkModule {
     fun provideApiService(retrofit: Retrofit): Api {
         return retrofit.create(Api::class.java)
     }
+}
+
+@Module
+abstract class FlickrModule {
+    @Binds
+    @IntoMap
+    @ViewModelKey(FlickrViewModel::class)
+    abstract fun bindViewModel(viewModel: FlickrViewModel): ViewModel
 }
